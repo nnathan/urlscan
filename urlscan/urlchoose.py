@@ -24,7 +24,7 @@ import os
 from os.path import dirname, exists, expanduser
 import re
 import shlex
-from subprocess import Popen, PIPE
+from subprocess import call, Popen, PIPE, DEVNULL
 import sys
 from threading import Thread
 from time import sleep
@@ -113,6 +113,7 @@ class URLChooser:
                      'g': self._top,
                      'j': self._down,
                      'k': self._up,
+                     'l': self._link_handler,
                      'P': self._config_create,
                      'p': self._palette,
                      'Q': self._quit,
@@ -207,6 +208,12 @@ class URLChooser:
         self.palette_idx = 0
         self.number = ""
         self.help_menu = False
+        try:
+            call(['xdg-open'], stdout=DEVNULL)
+            self.xdg_avail = True
+        except OSError:
+            self.xdg_avail = False
+        self.xdg = False
 
     def main(self):
         """Urwid main event loop
@@ -584,6 +591,15 @@ class URLChooser:
     def _get_search(self):
         return lambda: self.search, lambda: self.enter
 
+    def _link_handler(self, url):
+        """Function to open links via webbrowser module, xdg-open or custom
+        function.
+
+        """
+        if self.xdg_avail is True:
+            self.xdg = not self.xdg
+
+
     def mkbrowseto(self, url):
         """Create the urwid callback function to open the web browser or call
         another function with the URL.
@@ -609,8 +625,11 @@ class URLChooser:
                 if self._get_search()[1]() is True:
                     self.search = False
                     self.enter = False
-            elif not self.run:
+            elif not self.run and not self.xdg:
                 webbrowser.open(url)
+            elif self.xdg:
+                run = 'xdg-open "{}"'.format(url)
+                process = Popen(shlex.split(run), stdout=PIPE, stdin=PIPE)
             elif self.run and self.pipe:
                 process = Popen(shlex.split(self.run), stdout=PIPE, stdin=PIPE)
                 process.communicate(input=url.encode(sys.getdefaultencoding()))

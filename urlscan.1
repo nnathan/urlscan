@@ -50,10 +50,14 @@ for color options and allowed values.
 
 \fB7.\fR \fBu\fR will unescape the highlighted URL if necessary.
 
-\fB8.\fR Run a command with the selected URL as the argument or pipe the selected
-  URL to a command using the \fB--run\fR and \fB--pipe\fR arguments.
+\fB8.\fR Run a command with the selected URL as the argument or pipe the
+selected URL to a command using the \fB--run\fR and \fB--pipe\fR arguments.
 
-\fB9.\fR \fBF1\fR shows the help menu.
+\fB9.\fR Use \fBl\fR to cycle through whether URLs are opened using the Python
+webbrowser module (default), xdg-open (if installed) or an arbitrary function
+passed on the command line with\fB--run\fR or \fB--pipe\fR.
+
+\fB10.\fR \fBF1\fR shows the help menu.
 
 .SH OPTIONS
 .TP
@@ -131,6 +135,8 @@ The follow actions are supported:
 \fBdown\fR \-\- cursor down (Default: \fBj\fR)
 .TP
 \fBhelp_menu\fR \-\- show/hide help menu (Default: \fBF1\fR)
+.TP
+\fBlink_handler\fR \-\- cycle link handling (webbrowser, xdg-open or custom) (Default: \fBl\fR)
 .TP
 \fBopen_url\fR \-\- open selected URL (Default: \fBspace\fR or \fBenter\fR)
 .TP

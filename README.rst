@@ -46,6 +46,10 @@ Relative to urlview, urlscan has the following additional features:
 - Execute an arbitrary function (for example, copy URL to clipboard) instead of
   opening URL in a browser.
 
+- Use `l` to cycle through whether URLs are opened using the Python webbrowser
+  module (default), xdg-open (if installed) or an arbitrary function passed on
+  the command line.
+
 - Configure colors and keybindings via ~/.config/urlscan/config.json. Generate
   default config file for editing with `P`. Cycle through available palettes
   with `p`.
@@ -139,6 +143,7 @@ The follow actions are supported:
 - `context` -- show/hide context (default: `c`)
 - `down` -- cursor down (default: `j`)
 - `help_menu` -- show/hide help menu (default: `F1`)
+- `link_handler` -- cycle link handling (webbrowser, xdg-open or custom) (default: `l`)
 - `open_url` -- open selected URL (default: `space` or `enter`)
 - `palette` -- cycle through palettes (default: `p`)
 - `quit` -- quit (default: `q` or `Q`)
