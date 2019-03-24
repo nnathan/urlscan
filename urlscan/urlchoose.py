@@ -326,6 +326,7 @@ class URLChooser:
                     "context -- show/hide context\n"
                     "down -- cursor down\n"
                     "help_menu -- show/hide help menu\n"
+                    "link_handler -- cycle through xdg-open, webbrowser and user-defined function\n"
                     "open_url -- open selected URL\n"
                     "palette -- cycle through palettes\n"
                     "quit -- quit\n"
